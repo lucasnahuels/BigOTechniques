@@ -258,3 +258,46 @@ static void FindElementWithDictionary()
         Console.WriteLine("Elemento encontrado");
     }
 }
+
+
+//Ejemplo de Búsqueda del Elemento más repetido en un Arreglo 
+//reduciendo la complejidad de O(n^2) a O(2n). In Big O notation, constants are ignored, so O(2n) simplifies to O(n).
+static int FindMostRepeatedNumber()
+{
+    int[] arreglo = { 1, 2, 3, 2, 4, 5, 6, 2, 7, 8, 9, 2, 2, 3, 6, 6, 6, 5, 4, 3, 3, 8, 3, 5 };
+    var frequencyDict = new Dictionary<int, int>();
+
+    foreach (var num in arreglo)
+    {
+        if (frequencyDict.ContainsKey(num))
+        {
+            frequencyDict[num]++;
+        }
+        else
+        {
+            frequencyDict[num] = 1;
+        }
+    }
+
+    int mostRepeatedNumber = arreglo[0];
+    int maxFrequency = 0;
+
+    foreach (var kvp in frequencyDict)
+    {
+        if (kvp.Value > maxFrequency || (kvp.Value == maxFrequency && kvp.Key < mostRepeatedNumber))
+        {
+            mostRepeatedNumber = kvp.Key;
+            maxFrequency = kvp.Value;
+        }
+    }
+
+    //you can replace the second loop to iterate less times with linq.
+    //This approach mantains the O(n) time complexity, but actually iterates less times.
+    //return frequencyDict
+    //.OrderByDescending(kvp => kvp.Value)
+    //.ThenBy(kvp => kvp.Key)
+    //.First()
+    //.Key;
+
+    return mostRepeatedNumber;
+}
