@@ -299,5 +299,39 @@ static int FindMostRepeatedNumber()
     //.First()
     //.Key;
 
+    //or
+
+    //return frequencyDict
+    //.Where(kvp => kvp.Value == frequencyDict.Values.Max())
+    //.OrderBy(kvp => kvp.Key)
+    //.First()
+    //.Key;
+
+    Console.WriteLine(mostRepeatedNumber);
     return mostRepeatedNumber;
+}
+
+
+//Ejemplo de encontrar colisiones en coordenadas
+//reduciendo la complejidad de O(n^2) a O(n).
+static void FindCollisionsInCoordinates()
+{
+    var posiciones = new (int, int)[] { (1, 2), (2, 3), (1, 2), (3, 4), (2, 3), (2, 4), (2, 2), (2, 3) };
+
+    var colisiones = new HashSet<(int, int)>();
+    var posicionesUnicas = new HashSet<(int, int)>();
+
+    foreach (var posicion in posiciones)
+    {
+        if (!posicionesUnicas.Add(posicion))
+        {
+            colisiones.Add(posicion);
+        }
+    }
+
+    //print results //not part of the algorithm
+    foreach (var colision in colisiones)
+    {
+        Console.WriteLine($"({colision.Item1}, {colision.Item2})");
+    }   
 }
